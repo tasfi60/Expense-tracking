@@ -33,7 +33,7 @@ const Header = () => {
              {
                       user?.uid?
                       <>
-                       <Link to="/" class='nav-style ms-3 fw-bold fs-4 text-black-50'>Dashboard</Link>
+                       <Link to="/dashboard" class='nav-style ms-3 fw-bold fs-4 text-black-50'>Dashboard</Link>
                        <span class='fw-bold fs-4 text-end ms-5 text-success'>{user?.displayName}</span>
                        <Link onClick={handleLogOut} class='nav-style  ms-3 fw-bold fs-4 text-end text-black-50' >Logout</Link>
 

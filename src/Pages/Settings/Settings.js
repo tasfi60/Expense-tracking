@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../Context/Authprovider';
+import EditExpense from '../EditExpense/EditExpense';
 import './Settings.css';
 
 const Settings = () => {
@@ -112,6 +113,7 @@ const Settings = () => {
 
         <br/>
           <button type="submit" class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded">Add Expense</button>
+          <EditExpense></EditExpense>
         </form>
 
 
