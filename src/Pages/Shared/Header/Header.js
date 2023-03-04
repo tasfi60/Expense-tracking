@@ -26,7 +26,7 @@ const Header = () => {
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-auto ">
         <Link to="/" class='nav-style ms-3 fw-bold fs-4 text-black-50'>Home</Link>
-        <Link to="/" class='nav-style ms-3 fw-bold fs-4 text-black-50'>settings</Link>
+        <Link to="/settings" class='nav-style ms-3 fw-bold fs-4 text-black-50'>settings</Link>
 
        
              <div class="ms-5 ps-5">
