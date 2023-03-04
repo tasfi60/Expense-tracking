@@ -1,14 +1,57 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../Context/Authprovider';
 import './Settings.css';
 
 const Settings = () => {
+    const{user} = useContext(AuthContext);
+
+    const handleAddExpense = event =>{
+            event.preventDefault();
+            const form = event.target;
+            const category = form.category.value;
+            const currency = form.currency.value;
+            const price = form.price.value;
+            const date = form.date.value;
+            const id = user.uid;
+            const name = user.displayName;
+            
+
+            const expense = {
+                Category: category,
+                Currency:currency,
+                Price: price,
+                Date: date,
+                User: name,
+                Uid: id
+
+            }
+
+            fetch('http://localhost:5000/expense',{
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(expense)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if(data.acknowledged){
+                        form.reset();
+                    }
+                })
+                .catch(error => console.error(error));
+
+    }
+
     return (
-        <div>
-            <div>
+        
+  <div>
     <div class="max-width">
-      <section class="payment turquoise">
+      <section class="expense turquoise">
         <div class="grid-full padded-reverse">
-          <div class="grid-whole padded">
+          <div class="grid-whole padded mt-2">
             <h3>Manage Your Expenses</h3>
             <hr/>
           </div>
@@ -26,74 +69,60 @@ const Settings = () => {
                 </div>
                 <div class="grid-9 s-grid-12 padded">
                   <p>
-                    You don't currently have a card on file. Add one here.
+                    You don't currently have any expenses record. Add one here.
                   </p>
                 </div>
-                <div class="clear"></div>
-                <div class="cards">
-                  <h6 class="upper-bryant micro">accepted payment types</h6>
-                  <p>
-                    <span class="pf pf-visa"></span> <span class="pf pf-mastercard"></span> <span class="pf pf-american-express"></span> <span class="pf pf-jcb"></span> <span class="pf pf-discover"></span> <span class="pf pf-diners"></span>
-                  </p>
-                  <div class="clear"></div>
-                </div>
+                
               </div>
             </div>
           </div>
           <div class="grid-7 padded m-grid-whole s-grid-whole xs-grid-whole">
-            <form id="payment-form" action="/cards" accept-charset="UTF-8" method="post">
-              <input name="utf8" type="hidden" value="✓"/>
-              <div class="grid-whole">
-                <label for="card-number">
-                  <span class="upper-bryant small-bold">Card Number</span>
-                </label>
-                <input type="number" class="space" size="20" name="card-number" id="card-number"/>
-              </div>
-              <div class="grid-whole padded-reverse">
-                <div class="grid-5 padded">
-                  <div class="grid-5">
-                    <label for="cvc">
-                      <span class="upper-bryant small-bold">CVC</span>
-                      <input type="number" class="space" size="4" name="cvc" id="cvc"/>
-                    </label>
-                  </div>
-                  <div class="grid-7 cvc-box center">
-                    <img class="cvc" src="http://www.thisisstar.com/images/100UI/002/cvc_opt.svg"/>
-                  </div>
-                </div>
-                <div class="grid-7 padded">
-                  <div class="grid-whole">
-                    <span class="upper-bryant small-bold">
-                <label for="exp-month">
-                  Expiration
-                </label>
-              </span>
-                    <span class="upper-bryant micro">
-                <label for="exp-year">
-                  (MM/YYYY)
-                </label>
-              </span>
-                  </div>
-                  <div class="grid-4">
-                    <input type="number" class="space" size="2" data-stripe="exp-month" id="exp-month"/>
-                  </div>
-                  <div class="grid-2 center huge valign-dollar">
-                    <span class="upper-bryant tall-slash"> / </span>
-                  </div>
-                  <div class="grid-6">
-                    <input type="number" class="space" size="4" id="exp-year"/>
-                  </div>
-                </div>
-              </div>
-              <button type="submit" class="btn" id="update-payment">Update Card</button>
-            </form>
+
+          <form onSubmit={handleAddExpense} class="font-style">
+          <label for="option" class="grid-whole padded fs-4 font-style fw-bold me-4">Expense Category:</label>
+          <select id="option" class="p-1" name="category">
+            <option value="Housing and utilities">Housing and utilities</option>
+            <option value="Grocery">Grocery</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Personal care">Personal care</option>
+            <option value="Health and fitness">Health and fitness</option>
+            <option value="Education">Education </option>
+            <option value="Gifts and donations">Gifts and donations</option>
+            <option value="Travel">Travel </option>
+            <option value="Insurance">Insurance</option>
+            <option value="Taxes">Taxes</option>
+            <option value="Entertainment">Entertainment</option>
+            <option value="Other">Other</option>
+          </select>
+          <br/>
+          <label for="option" class="grid-whole padded fs-4 font-style fw-bold me-4">Price:</label>
+          <select id="currency" name="currency">
+          <option value="USD">USD</option>
+          <option value="EUR">EUR</option>
+          <option value="INR">INR</option>
+          <option value="GBP">GBP</option>
+          <option value="BDT">BDT</option>
+        </select>
+        <input type="number" id="price" name="price" min="1.00" step="1" class="w-25 ms-3 border border-dark" required/>
+          <br/>
+
+          <label for="date" class="grid-whole padded fs-4 font-style fw-bold me-4">Date:</label>
+          <input type="date" id="date" name="date" class="w-25 ms-3 border border-dark"  required/>
+
+
+        <br/>
+          <button type="submit" class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded">Add Expense</button>
+        </form>
+
+
+            
           </div>
-          <div class="clear"></div>
+         
         </div>
       </section>
     </div>
   </div>
-        </div>
+        
     );
 };
 

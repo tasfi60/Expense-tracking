@@ -26,18 +26,19 @@
     margin: 0 auto;
   }
   
-  .payment {
-    padding: 5%;
-    position: relative;
+  .expense {
+   
+
+    
     top: 15vh;
     box-shadow: 15px 15px 0px -4px rgba(0, 0, 0, 0.3), 0px 0px 85px 0px rgba(0, 0, 0, 0.4), ;
   ;
   }
   
   .turquoise {
-    background-color: #afd1c0;
-    color: #416051;
-    border: 1px solid rgb(111, 154, 111);
+    background-color: #d4c1bf;
+    color: #310303;
+    border: 1px solid rgb(51, 46, 71);
   }
   
   .headline {
