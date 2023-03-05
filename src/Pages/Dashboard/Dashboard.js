@@ -14,26 +14,37 @@ const Dashboard = () => {
     function handleNavigate(e) {
         navigate(`/Editexpense/${e}`);
     }
-     
+     console.log(user.uid);
 
-    useEffect(()=>{
+    useEffect(() => {
+      if (!user?.uid) {
+        setExpense([]);
+        return;
+      }
+    
       fetch(`http://localhost:5000/expense?uid=${user.uid}`)
-            
-      .then(res => res.json())
-      .then(data => 
-          
-          {
-              if(user.uid)
-              {
-                  const expenses = data.filter(rev => rev.uid === user.uid);
-                  setExpense(expenses);
-              }
-          }
-          )
+        .then(res => res.json())
+        .then(data => {
 
-                  
+          
+            if(user.uid)
+            {
+                const exp = data.filter(rev => rev.uid === user.uid && !rev.is_deleted);
+                setExpense(exp);
+            }
+        
          
-  },[user?.uid])
+        })
+        .catch(err => {
+          console.error(err);
+          alert('Unable to fetch expenses');
+        });
+    }, [user?.uid]);
+    
+    
+    
+    
+    
 
   const handleDelete = async (expenseId) => {
     const confirm = window.confirm('Are you sure you want to delete this expense?');
