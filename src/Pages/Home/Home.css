@@ -1,0 +1,27 @@
+.container {
+    position: relative;
+  }
+  
+  .bg-image {
+    background-image: url("https://static.vecteezy.com/system/resources/previews/006/398/844/original/investment-statistic-growth-with-money-icon-illustration-finance-object-icon-concept-isolated-premium-flat-cartoon-style-vector.jpg");
+    height: 800px; /* set the height you want */
+ 
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+  }
+  
+  button {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #cf5656;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  

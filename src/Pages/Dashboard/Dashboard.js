@@ -8,7 +8,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
-  Legend
+  Legend,PieChart, Pie
 } from "recharts";
 import './Dashboard.css'
 
@@ -16,9 +16,10 @@ import './Dashboard.css'
 
 const Dashboard = () => {
 
+    
     const {user} = useContext(AuthContext);
     const [expense,setExpense] = useState([])
-
+   
     const navigate = useNavigate();
 
     function handleNavigate(e) {
@@ -135,7 +136,11 @@ const Dashboard = () => {
       
       <Bar dataKey="Price" fill="#82ca9d" />
     </BarChart>
+
+
+    
 		</div>
+   
     </div>
 	
 		
