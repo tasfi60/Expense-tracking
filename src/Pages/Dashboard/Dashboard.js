@@ -1,4 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/Authprovider';
 
@@ -15,20 +16,40 @@ const Dashboard = () => {
     }
      
 
-    fetch(`http://localhost:5000/expense?uid=${user.uid}}`,{
-                method: 'GET',
-                headers: {
-                    'content-type': 'application/json'
-                }
-                
-            })
-                .then(res => res.json())
-                .then(data => {
-                    setExpense(data)
-                    
-                })
-                .catch(error => console.error(error));
+    useEffect(()=>{
+      fetch(`http://localhost:5000/expense?uid=${user.uid}`)
+            
+      .then(res => res.json())
+      .then(data => 
+          
+          {
+              if(user.uid)
+              {
+                  const expenses = data.filter(rev => rev.uid === user.uid);
+                  setExpense(expenses);
+              }
+          }
+          )
 
+                  
+         
+  },[user?.uid])
+
+  const handleDelete = async (expenseId) => {
+    const confirm = window.confirm('Are you sure you want to delete this expense?');
+    if (confirm) {
+      try {
+        await axios.delete(`http://localhost:5000/expense/${expenseId}`);
+        const updatedexpenses = expense.filter((exp) => exp._id !== expenseId);
+        setExpense(updatedexpenses);
+        alert('Expense deleted successfully');
+      } catch (err) {
+        console.error(err);
+        alert('Unable to delete expense');
+      }
+    }
+  };
+                
     
     return (
         <div class="font-style my-4">
@@ -54,6 +75,11 @@ const Dashboard = () => {
             <td><button type="button" onClick={() => handleNavigate(e._id)} class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded">
             Edit
           </button></td>
+            <td><button type="button" onClick={() => handleDelete(e._id)} class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded">
+            Delete
+          </button></td>
+         
+
           </tr>)
           
 
