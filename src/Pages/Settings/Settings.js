@@ -64,13 +64,13 @@ const Settings = () => {
                 <div class="grid-3 s-grid-12 padded">
                   <p class="center">
                     <span class="icon-wallet icon-huge">
-                    <img src="http://www.thisisstar.com/images/100UI/002/wallet.svg"/>
+                    <img src="https://cdni.iconscout.com/illustration/premium/thumb/expense-management-4268366-3561009.png" alt='/'/>
                     </span>
                   </p>
                 </div>
                 <div class="grid-9 s-grid-12 padded">
                   <p>
-                    You don't currently have any expenses record. Add one here.
+                    Add  Your Expense here.
                   </p>
                 </div>
                 

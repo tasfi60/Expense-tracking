@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/Authprovider';
 
 
@@ -100,7 +100,11 @@ const Dashboard = () => {
     
   
   </tbody>
-</table>
+</table> 
+        
+          <Link to="/settings" class="nav-style text-dark bg-white">Add More +</Link>
+         
+     
         </div>
     );
 };
