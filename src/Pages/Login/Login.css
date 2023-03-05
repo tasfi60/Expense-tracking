@@ -44,6 +44,7 @@ body {
     background-color: rgba(255, 235, 59, 0.24);
     border-color: rgba(255, 235, 59, 0.24);
     color: #e6e6e6;
+    cursor: pointer;
 }
 .form-button:hover,
 .form-button:focus,
@@ -53,9 +54,11 @@ body {
 .form-button:active:hover,
 .form-button.active:hover,
 .form-button.active:focus {
-    background-color: rgba(255, 235, 59, 0.473);
-    border-color: rgba(255, 235, 59, 0.473);
+    background-color: rgba(36, 191, 132, 0.473);
+    border-color: rgba(55, 241, 154, 0.473);
     color: #e6e6e6;
+    cursor: pointer;
+
 }
 .button-l {
     width: 100% !important;

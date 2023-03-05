@@ -22,6 +22,8 @@ const EditExpense = () => {
 
   const handleUpdateReview = event =>{
      event.preventDefault();
+
+   
      console.log(newExpense);
      fetch(`http://localhost:5000/expense/${update._id}`,{
            method: 'PUT',
@@ -69,13 +71,6 @@ const EditExpense = () => {
           </select>
           <br/>
           <label for="option" class="grid-whole padded fs-4 font-style fw-bold me-4">Price:</label>
-          <select id="currency" name="currency" class='p-2' onChange={handleInputChange} defaultValue={update.Currency} required>
-          <option value="USD">USD</option>
-          <option value="EUR">EUR</option>
-          <option value="INR">INR</option>
-          <option value="GBP">GBP</option>
-          <option value="BDT">BDT</option>
-        </select>
         <input type="number" id="price" name="price" onChange={handleInputChange} 
         defaultValue={update.Price} min="1.00" step="1" class="w-25 h-25 ms-3 border border-dark" required/>
           <br/>

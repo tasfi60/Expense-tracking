@@ -2,6 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/Authprovider';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Legend
+} from "recharts";
+import './Dashboard.css'
+
 
 
 const Dashboard = () => {
@@ -104,9 +114,44 @@ const Dashboard = () => {
         
           <Link to="/settings" class="nav-style text-dark bg-white">Add More +</Link>
          
-     
-        </div>
+        
+<div class="chart-container  mt-5 pt-5 font-style">
+  <h2>EXPENSE & BUDGET BarChart</h2>
+    <BarChart
+      width={800}
+      height={400}
+      data={expense}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5
+      }}
+    >
+      <CartesianGrid strokeDasharray="3 3" />
+      <XAxis dataKey="Category" />
+      <YAxis />
+      <Legend />
+      
+      <Bar dataKey="Price" fill="#82ca9d" />
+    </BarChart>
+		</div>
+    </div>
+	
+		
+		
+	
+
+	
+		
+		
+		
+
+	
+	
     );
 };
 
 export default Dashboard;
+
+
