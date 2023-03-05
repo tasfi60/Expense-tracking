@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
-import EditExpense from '../EditExpense/EditExpense';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/Authprovider';
+
 
 const Dashboard = () => {
 
-
+    const {user} = useContext(AuthContext);
     const [expense,setExpense] = useState([])
 
-    fetch('http://localhost:5000/expense',{
+    const navigate = useNavigate();
+
+    function handleNavigate(e) {
+        navigate(`/Editexpense/${e}`);
+    }
+     
+
+    fetch(`http://localhost:5000/expense?uid=${user.uid}}`,{
                 method: 'GET',
                 headers: {
                     'content-type': 'application/json'
@@ -42,12 +51,14 @@ const Dashboard = () => {
             <th scope="row">{i + 1}</th>
             <td>{e.Price} {e.Currency}</td>
             <td>{e.Category}</td>
-            <td><EditExpense></EditExpense></td>
-            <td><EditExpense></EditExpense></td>
+            <td><button type="button" onClick={() => handleNavigate(e._id)} class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded">
+            Edit
+          </button></td>
           </tr>)
           
 
         }
+        
       
     
   

@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import EditExpense from "../Pages/EditExpense/EditExpense";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Settings from "../Pages/Settings/Settings";
 import Signup from "../Pages/SignUp/Signup";
+import PrivateRoute from "./PrivateRoutes/PrivateRoute";
 
 export const routes = createBrowserRouter([
     {
@@ -17,7 +19,7 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/settings',
-                element: <Settings></Settings>
+                element:<PrivateRoute><Settings></Settings></PrivateRoute> 
             },
             {
                 path:'/login',
@@ -29,8 +31,16 @@ export const routes = createBrowserRouter([
             },
             {
                 path:'/dashboard',
-                element: <Dashboard></Dashboard>
-            }
+                element:<PrivateRoute><Dashboard></Dashboard></PrivateRoute> 
+            },
+            {
+                path:'/Editexpense/:id',
+                loader: async ({params}) => {
+                    return fetch(`http://localhost:5000/expense/${params.id}`)
+                     
+                },
+                element: <PrivateRoute><EditExpense></EditExpense></PrivateRoute>
+            } 
         ]
     }
 

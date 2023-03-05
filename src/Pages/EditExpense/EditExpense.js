@@ -1,78 +1,59 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLoaderData, useParams } from 'react-router-dom';
 import { AuthContext } from '../../Context/Authprovider';
+import './EditExpense.css'
 
 const EditExpense = () => {
-    const{user} = useContext(AuthContext);
-    const [update,setUpdate] = useState([]);
+  
+  const {user} = useContext(AuthContext);
+  const update = useLoaderData();
+  
+  const [newExpense, setNewExpense] = useState(update);
 
-    useEffect(() => {
-        const url = `http://localhost:5000/expense/${user.uid}`;
-    
-        fetch(url, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(response => response.json())
-          .then(data => setUpdate(data))
-          .catch(error => console.error(error));
-      }, [user.uid]);
+  
+  const handleInputChange = event =>{
+     const field = event.target.name;
+     const value = event.target.value;
+     const updatedExpense = {...newExpense}
+     updatedExpense[field] = value;
+     setNewExpense(updatedExpense);
 
+  }
 
-    const [ newExpense, setNewExpense] = useState(update);
-
-    const handleInputChange = event =>{
-       const field = event.target.name;
-       const value = event.target.value;
-       const newReview = {...newExpense}
-       newReview[field] = value;
-       setNewExpense(newReview);
-
-    }
-
-    const handleUpdateReview = event =>{
-       event.preventDefault();
-       console.log(newExpense);
-       fetch(`http://localhost:5000/expense/${user.uid}`,{
-             method: 'PUT',
-             headers:{
-               'content-type': 'application/json'
-             },
-             body: JSON.stringify(newExpense)
-       })
-       .then(res => res.json())
-       .then(data =>{
-           if(data.modifiedCount > 0){
-               alert('Review Updated!')
-               console.log(data);
-               event.target.reset();
-           }
-              
-       })
-   }
-       
+  const handleUpdateReview = event =>{
+     event.preventDefault();
+     console.log(newExpense);
+     fetch(`http://localhost:5000/expense/${update._id}`,{
+           method: 'PUT',
+           headers:{
+             'content-type': 'application/json'
+           },
+           body: JSON.stringify(newExpense)
+     })
+     .then(res => res.json())
+     .then(data =>{
+         if(data.modifiedCount > 0){
+             alert('Edited Successfully!')
+             console.log(data);
+             event.target.reset();
+         }
+            
+     })
+ }
+     
+  
 
 
     return (
         <div>
            
-<button type="button" class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Edit
-</button>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit here</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form onSubmit={handleUpdateReview} class="font-style">
+
+
+      <form onSubmit={handleUpdateReview} class="font-style mt-5">
           <label for="option" class="grid-whole padded fs-4 font-style fw-bold me-4">Expense Category:</label>
-          <select id="option" class="p-1" name="category" onChange={handleInputChange} defaultValue={update.Category}>
+          <select id="option" class="p-2 fs-5" name="category" onChange={handleInputChange} defaultValue={update.Category} required>
             <option value="Housing and utilities">Housing and utilities</option>
             <option value="Grocery">Grocery</option>
             <option value="Transportation">Transportation</option>
@@ -88,8 +69,7 @@ const EditExpense = () => {
           </select>
           <br/>
           <label for="option" class="grid-whole padded fs-4 font-style fw-bold me-4">Price:</label>
-          <select id="currency" name="currency" onChange={handleInputChange}
-          defaultValue={update.Currency}>
+          <select id="currency" name="currency" class='p-2' onChange={handleInputChange} defaultValue={update.Currency} required>
           <option value="USD">USD</option>
           <option value="EUR">EUR</option>
           <option value="INR">INR</option>
@@ -97,24 +77,21 @@ const EditExpense = () => {
           <option value="BDT">BDT</option>
         </select>
         <input type="number" id="price" name="price" onChange={handleInputChange} 
-        defaultValue={update.Price} min="1.00" step="1" class="w-50 h-25 ms-3 border border-dark" required/>
+        defaultValue={update.Price} min="1.00" step="1" class="w-25 h-25 ms-3 border border-dark" required/>
           <br/>
 
         
 
         <br/>
-        <button type="submit" class="form-button btn mt-3 btn-md margin-b w-50 fs-6 rounded fs-6"><small>Save changes</small></button>
+        <div class="buttons mx-auto">
+        <button type="submit" class="form-button btn mt-3 btn-md margin-b w-25  fs-6 rounded fs-6"><small>Save changes</small></button>
+        <button class="form-button btn mt-3 btn-md margin-b w-25 px-4 fs-6 rounded fs-6"><small><Link class="nav-style  " to='/dashboard'>Go Back</Link></small></button>
+        </div>
+        
         </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="form-button btn mt-3 btn-md margin-b w-25 fs-6 rounded" data-bs-dismiss="modal">Close</button>
-       
-      </div>
-    </div>
-  </div>
-</div>
-            
-        </div>
+      
+  
     );
 };
 
