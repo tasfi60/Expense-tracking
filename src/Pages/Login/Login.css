@@ -64,7 +64,7 @@ body {
     width: 100% !important;
 }
 
-/* Margins g(global) - l(left) - r(right) - t(top) - b(bottom) */
+
 
 .margin-g {
     margin: 15px;
@@ -175,7 +175,7 @@ body {
 
 }
 
-/* Login & Register Pages*/
+
 
 .login-container {
     max-width: 400px;
