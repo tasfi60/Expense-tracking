@@ -2,6 +2,8 @@ Expense Manager:
 
 Expense Manager is a web application designed to help users keep track of their expenses and budgets. The frontend of the application is built using ReactJS, while the backend is built using NodeJS. The application uses normal api Fetch and Axios for data fetching, and custom CSS and Bootstrap for styling.
 
+![description](r5.JPG)
+
 Features:
 
 
@@ -15,6 +17,29 @@ Expense and budget summary: Users can view a summary of their expenses and budge
 Settings page: Users can set their budget plan on settings page, including the category,budget amount and date.
 Expense and budget summary with chart: Users can view a barchart of their expenses and budgets, which provides a visual representation of their spending trend.
 
+
+![description](r6.JPG)
+
+![description](r7.JPG)
+
+![description](r8.JPG)
+
+![description](r9.JPG)
+
+Dependencies:
+
+
+The Expense Manager Application has the following dependencies:
+
+axios: ^0.21.1
+react: ^17.0.1
+react-dom: ^17.0.1
+react-router-dom: ^5.2.0
+react-scripts: 4.0.3
+web-vitals: ^1.0.1
+recharts: ^2.0.10
+node.js: ^14.16.0
+bootstrap: ^5.1.0
 
 Installation:
 
