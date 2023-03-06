@@ -39,3 +39,51 @@ View your expense and budget summary on the dashboard page.
 Setup your budget plan on the "Settings" page.
 
 
+Getting Started :
+
+
+To get started with the Expense Manager Application, you will need to follow these steps:
+
+Prerequisites:
+
+Node.js
+NPM
+
+Installation:
+
+1.Clone the repository to your local machine.
+2.Navigate to the project directory.
+3.Install the dependencies by running the following command:
+
+![dependencies](r1.JPG)
+
+Runner Script:
+
+Usage
+
+To build and run the Expense Manager Application, you can use the runner shell script provided in the project. The script automates the entire build and execute process, so you don't have to run each command manually.
+
+
+Create the runner shell script
+
+
+To create a runner shell script, open a text editor and create a new file with a .sh file extension. You can name the file anything you want, but it's a good idea to choose a name that describes what the script does. For example, if your script builds and runs your application, you could name it "run-app.sh".
+
+
+In the runner shell script, write the commands that you would normally use to build and run your application. For example, if your application is built with npm and runs on a local server, you might include the following commands:
+
+![bash](r4.JPG)
+
+
+To use the runner shell script, follow these steps:
+
+1.Open your terminal and navigate to the root directory of the project.
+2.Make the runner shell script executable by running the following command:
+
+![bash](r2.JPG)
+
+3.Run the script by typing the following command:
+
+![bash](r3.JPG)
+
+The script will execute the commands to install dependencies, build the application, and start the server. Once the server is running, you can access the application in your web browser by going to http://localhost:3000.
